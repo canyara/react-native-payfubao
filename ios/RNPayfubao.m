@@ -12,7 +12,7 @@
 
 - (instancetype)init{
     if (self = [super init]) {
-
+        
     }
     return self;
     
@@ -27,7 +27,7 @@ RCT_EXPORT_MODULE()
 
 - (NSArray<NSString *> *)supportedEvents
 {
-    return @[@"PFBResult", "AppleResult"];
+    return @[@"PFBResult", @"AppleResult"];
 }
 
 //- (void)calendarEventReminderReceived:(NSNotification *)notification
@@ -36,7 +36,7 @@ RCT_EXPORT_MODULE()
 //    [self sendEventWithName:@"EventReminder" body:@{@"name": eventName}];
 //}
 
-RCT_EXPORT_METHOD(sendWithRepeatStatus:(NSString *)paraId appId:(NSString *)appID
+RCT_EXPORT_METHOD(sendWithRepeatStatus:(NSString *)paraId appId:(NSString *)appId
                   key:(NSString *)key childParaId:(NSString *)childParaId infoCost:(NSString *)infoCost
                   orderno:(NSString *)orderno
                   notify_url:(NSString *)notify_url
@@ -44,7 +44,7 @@ RCT_EXPORT_METHOD(sendWithRepeatStatus:(NSString *)paraId appId:(NSString *)appI
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 {
-    _model = [[JSInfomationModel alloc] init];
+    JSInfomationModel * _model = [[JSInfomationModel alloc] init];
     _model.infoCost = infoCost;                     //支付金额,以分为单位,注意
     _model.appId = appId;                           //贝付宝平台分配的产品id
     _model.paraId = paraId;                         //贝付宝平台分配的商户编号
@@ -59,28 +59,28 @@ RCT_EXPORT_METHOD(sendWithRepeatStatus:(NSString *)paraId appId:(NSString *)appI
     //获取当前后台切换的支付方式
     [[JSSystem sharedInstance] sendWithRepeatStatus:NO Infomation:_model
                         completionSucessResultBlock:^(NSString *result) {
-        
-        
-        //调起对应的支付方式，result为0 弹出选择框，调第三方支付；106调苹果支付，苹果支付需要开发者自己实现，SDK只提供了调起的接口，即otherBlock里
-        [[JSSystem sharedInstance] startStatus:result Infomation:_model backBlock:^(id su) {
-            // 若商户服务器需要根据客户端上传的标识确定需要下哪种订单，客户端可以将index作为标识上传服务器，来区分是哪种第三方支付方式
-            int index = [[NSString stringWithFormat:@"%@",su] intValue];
-            
-            //result: 0  第三方支付   106  苹果支付
-            //index: 0: ali 1: wx 2: yl 3: cancel
-            resolve(result, index);
-            
-        } otherBlock:^{
-            //这里是调起苹果支付的接口
-            resolve(result, 0);
-            [[JSSystem sharedInstance] beginApplePayWithAppleID:appleId];
-        }];
-                    
-    } failureBlock:^(NSError *error) {
-        //NSLog(@"++++%@",error.localizedDescription);
-        reject(error.localizedDescription);
-        [[JSSystem sharedInstance] beginApplePayWithAppleID:appleId];
-    } url:nil];
+                            
+                            
+                            //调起对应的支付方式，result为0 弹出选择框，调第三方支付；106调苹果支付，苹果支付需要开发者自己实现，SDK只提供了调起的接口，即otherBlock里
+                            [[JSSystem sharedInstance] startStatus:result Infomation:_model backBlock:^(id su) {
+                                // 若商户服务器需要根据客户端上传的标识确定需要下哪种订单，客户端可以将index作为标识上传服务器，来区分是哪种第三方支付方式
+                                NSString* index = [NSString stringWithFormat:@"%@",su];
+                                
+                                //result: 0  第三方支付   106  苹果支付
+                                //index: 0: ali 1: wx 2: yl 3: cancel
+                                resolve(@{@"result": result, @"index":index});
+                                
+                            } otherBlock:^{
+                                //这里是调起苹果支付的接口
+                                resolve(@{@"result": result});
+                                [[JSSystem sharedInstance] beginApplePayWithAppleID:appleId];
+                            }];
+                            
+                        } failureBlock:^(NSError *error) {
+                            //NSLog(@"++++%@",error.localizedDescription);
+                            reject(error.localizedDescription, error.localizedDescription, error);
+                            [[JSSystem sharedInstance] beginApplePayWithAppleID:appleId];
+                        } url:nil];
 }
 
 #pragma mark - JsSDKDelegate
@@ -141,4 +141,5 @@ RCT_EXPORT_METHOD(sendWithRepeatStatus:(NSString *)paraId appId:(NSString *)appI
 }
 
 @end
-  
+
+
