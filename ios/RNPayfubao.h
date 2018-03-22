@@ -5,7 +5,7 @@
 #import <React/RCTBridgeModule.h>
 #endif
 
-@interface RNPayfubao : NSObject <RCTBridgeModule>
+@interface RNPayfubao : RCTEventEmitter <RCTBridgeModule>
 
 @end
   
