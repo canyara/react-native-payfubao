@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.author             = { "canyara" => "canyara@gmail.com" }
   s.platform     = :ios, "7.0"
   s.source       = { :git => "https://github.com/canyara/react-native-payfubao.git", :tag => "master" }
-  s.source_files  = "RNPayfubao/**/*.{h,m}"
+  s.source_files  = "RNPayfubao/**/*.{h,m}", "Libs/SVProgressHUD/**/*.{h,m}"
   #s.requires_arc = true
   s.preserve_paths  = "**/*.js"
   s.ios.vendored_frameworks = "Libs/JSProSDK.framework"
