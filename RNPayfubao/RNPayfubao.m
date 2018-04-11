@@ -41,6 +41,7 @@ RCT_EXPORT_METHOD(sendWithRepeatStatus:(NSString *)paraId appId:(NSString *)appI
                   orderno:(NSString *)orderno
                   notify_url:(NSString *)notify_url
                   appleId:(NSString *)appleId
+                  typeArray:(NSArray *)typeArray
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 {
@@ -49,7 +50,7 @@ RCT_EXPORT_METHOD(sendWithRepeatStatus:(NSString *)paraId appId:(NSString *)appI
     _model.appId = appId;                           //贝付宝平台分配的产品id
     _model.paraId = paraId;                         //贝付宝平台分配的商户编号
     _model.childParaId = childParaId;               //子渠道号,只有一个分发渠道则默认为 1 即可
-    _model.typeArray = @[@"0",@"1",@"2"];            //0:支付宝   1:微信   2:银联
+    _model.typeArray = typeArray;                   //0:支付宝   1:微信   2:银联
     _model.orderno = orderno;
     //_model.attach = @"1111111";                       //透传参数,限制最大32位
     _model.notify_url = notify_url;                 //异步通知地址，苹果支付成功后，贝付宝服务器通过此参数通知商户服务器支付结果
