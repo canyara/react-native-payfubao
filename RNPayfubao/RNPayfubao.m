@@ -83,6 +83,13 @@ RCT_EXPORT_METHOD(sendWithRepeatStatus:(NSString *)paraId appId:(NSString *)appI
                         } url:nil];
 }
 
+RCT_EXPORT_METHOD(payWithBody:(NSDictionary *)body)
+{
+    //下单返回的json  存为dict 调起支付
+    [[JSSystem sharedInstance] beginWithJson:body backBlock:nil];
+}
+
+
 #pragma mark - JsSDKDelegate
 
 //-(void)getResultWhenEnterForegroundWithType:(NSInteger)type
