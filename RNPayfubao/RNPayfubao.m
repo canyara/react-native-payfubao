@@ -123,7 +123,9 @@ RCT_EXPORT_METHOD(payWithBody:(NSDictionary *)body)
  */
 -(void)getResultWhenEnterForegroundWithResult:(NSDictionary *)resultDic
 {
-    //实现此代理方法后，返回APP后会自动调用此方法，SDK内部自动查询结果  注：此结果是向贝付宝服务器查询的结果
+    //实现此代理方法后，返回APP后会自动调用此方法，SDK内部自动查询结果
+    NSLog(@"付款结果%@",resultDic);
+    
     [self sendEventWithName:@"PFBResult" body:@{@"result":resultDic}];
     [[NSNotificationCenter defaultCenter] removeObserver:[JSSystem sharedInstance]];  //移除通知，不能省略
 }
@@ -144,6 +146,7 @@ RCT_EXPORT_METHOD(payWithBody:(NSDictionary *)body)
  */
 -(void)getApplePayResult:(NSDictionary *)resultDic
 {
+    NSLog(@"苹果内购支付结果：%@",resultDic);
     [self sendEventWithName:@"AppleResult" body:@{@"result":resultDic}];
 }
 
