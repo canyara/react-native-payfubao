@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		EFD66B8D2063E77400E16964 /* RNPayfubao.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD66B8C2063E77400E16964 /* RNPayfubao.m */; };
-		EFEC6AE12063A08E0062108C /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EFEC6AD52063A08E0062108C /* SVRadialGradientLayer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		EFEC6AE22063A08E0062108C /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFEC6AD82063A08E0062108C /* SVProgressAnimatedView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		EFEC6AE32063A08E0062108C /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EFEC6ADA2063A08E0062108C /* SVProgressHUD.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		EFEC6AE42063A08E0062108C /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFEC6ADB2063A08E0062108C /* SVIndefiniteAnimatedView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		EFEC6AE12063A08E0062108C /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EFEC6AD52063A08E0062108C /* SVRadialGradientLayer.m */; };
+		EFEC6AE22063A08E0062108C /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFEC6AD82063A08E0062108C /* SVProgressAnimatedView.m */; };
+		EFEC6AE32063A08E0062108C /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EFEC6ADA2063A08E0062108C /* SVProgressHUD.m */; };
+		EFEC6AE42063A08E0062108C /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFEC6ADB2063A08E0062108C /* SVIndefiniteAnimatedView.m */; };
 		EFEC6AE52063A08E0062108C /* JSProSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFEC6AE02063A08E0062108C /* JSProSDK.framework */; };
 /* End PBXBuildFile section */
 
