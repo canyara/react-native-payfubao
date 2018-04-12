@@ -14,9 +14,8 @@
     if (self = [super init]) {
         
     }
-    return self;
-    
     [JSSystem sharedInstance].delegate = self;
+    return self;
 }
 
 - (dispatch_queue_t)methodQueue
