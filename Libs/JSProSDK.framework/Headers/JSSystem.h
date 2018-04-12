@@ -15,29 +15,15 @@
 
 
 /***
-* 获取点击选项下标值:
-* index : 得到的下标值
+* 获取点击选项的title
+* title 的值： Cancel，z，w，y；
+*  z，w，y，分别代表三种选项title的拼音首字母
 */
--(void)getIndex:(NSString *)index;
-
+-(void)getIndex:(NSString *)title;
 
 
 /***
-* 当切换回应用后.在此方法内根据type获取结果，
-* 实现此代理方法后，返回APP后会自动调用此方法，可根据type，向商户自己的服务器进行结果查询
-*/
--(void)getResultWhenEnterForegroundWithType:(NSInteger)type;
-
-
-
-
-/***
-* 当切换回应用后.在此方法内根据type获取结果，
 * 实现此代理方法后，返回APP后会自动调用此方法，SDK内部自动查询结果  注：此结果是向贝付宝服务器查询的结果
-* type  : 0   z
-*        : 1   w
-*        : 2   y
- 
 * resultDic : 结果
  
 * status 1   该订单支付成功
@@ -51,7 +37,7 @@
 * status 6   客户端获取结果时网络错误
 * status 7   客户端获取结果时返回json错误
 */
--(void)getResultWhenEnterForegroundWithType:(NSInteger)type Result:(NSDictionary *)resultDic;
+-(void)getResultWhenEnterForegroundWithResult:(NSDictionary *)resultDic;
 
 
 
@@ -131,28 +117,22 @@
 
 /*
  * 调起苹果内购支付
- * applePayID   苹果后台配置的商品内购id
+ * applePayID   苹果后台配置的商品内购id；
+ * totalFee     商品价格，单位是分；
+ * appleOrderNo 商户的苹果订单号，不超过32位；
+ * notifyUrl    苹果支付完成后的异步通知地址，贝付宝服务器通过此地址通知商户服务器；
+ * attach       透传参数 ，不超过32的字母或者数字，不能为中文；
+ * password     调起苹果内购支付时，如果购买的内购商品属于自动续订订阅商品（区别于消耗型商品），那么在支付成功后进行验证时需要添加秘钥才能验证，否则会返回21004
+ 如何查看密钥：在添加内购商品页面，点击右边 【App 专用共享密钥】 即可查看该密钥；
+ 如果是购买的自动续订商品，那么把该密钥赋给 password 属性就可；
+ 如果是购买的消耗型商品，那么把password 属性赋字符 1 ；
  */
--(void)beginApplePayWithAppleID:(NSString *)applePayID;
-
-
-
-
-
-/***
-* 如果使用商家自己的切换方法，则请使用该方法调起支付，调起不同的类型需要通过type进行区分
-* backJson   商家服务器返回的订单信息,解析为NSDictionary格式;
-* type       选择的方式: 0  z   ;
-*                      1  w   ;
-*                      2  y   ;
-*/
--(void)beginWithJson:(NSDictionary * )backJson withType:(NSInteger)type;
-
-
-
-
-
-
+-(void)beginApplePayWithAppleID:(NSString *)applePayID
+                       TotalFee:(NSString *)totalFee
+                   AppleOrderNO:(NSString *)appleOrderNo
+                      NotifyUrl:(NSString *)notifyUrl
+                         Attach:(NSString *)attach
+               ApplePayPassword:(NSString *)password;
 
 @end
 

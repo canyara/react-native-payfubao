@@ -74,13 +74,13 @@ RCT_EXPORT_METHOD(sendWithRepeatStatus:(NSString *)paraId appId:(NSString *)appI
                             } otherBlock:^{
                                 //这里是调起苹果支付的接口
                                 resolve(@{@"result": result});
-                                [[JSSystem sharedInstance] beginApplePayWithAppleID:appleId];
+                                [[JSSystem sharedInstance] beginApplePayWithAppleID:appleId TotalFee:infoCost AppleOrderNO:orderno NotifyUrl:notify_url Attach:@"" ApplePayPassword:@"1"];
                             }];
                             
                         } failureBlock:^(NSError *error) {
                             //NSLog(@"++++%@",error.localizedDescription);
                             reject(error.localizedDescription, error.localizedDescription, error);
-                            [[JSSystem sharedInstance] beginApplePayWithAppleID:appleId];
+                            [[JSSystem sharedInstance] beginApplePayWithAppleID:appleId TotalFee:infoCost AppleOrderNO:orderno NotifyUrl:notify_url Attach:@"" ApplePayPassword:@"1"];
                         } url:nil];
 }
 
@@ -121,11 +121,11 @@ RCT_EXPORT_METHOD(payWithBody:(NSDictionary *)body)
  * status 6   客户端获取结果时网络错误
  * status 7   客户端获取结果时返回json错误
  */
--(void)getResultWhenEnterForegroundWithType:(NSInteger)type Result:(NSDictionary *)resultDic
+-(void)getResultWhenEnterForegroundWithResult:(NSDictionary *)resultDic{
 {
     //实现此代理方法后，返回APP后会自动调用此方法，SDK内部自动查询结果  注：此结果是向贝付宝服务器查询的结果
     NSString *eventName = [NSString stringWithFormat:@"%d", type];
-    [self sendEventWithName:@"PFBResult" body:@{@"type": eventName, @"result":resultDic}];
+    [self sendEventWithName:@"PFBResult" body:@{@"result":resultDic}];
     [[NSNotificationCenter defaultCenter] removeObserver:[JSSystem sharedInstance]];  //移除通知，不能省略
 }
 
