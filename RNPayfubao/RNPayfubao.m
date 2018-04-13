@@ -73,14 +73,20 @@ RCT_EXPORT_METHOD(sendWithRepeatStatus:(NSString *)paraId appId:(NSString *)appI
                             } otherBlock:^{
                                 //这里是调起苹果支付的接口
                                 resolve(@{@"result": result});
-                                [[JSSystem sharedInstance] beginApplePayWithAppleID:appleId TotalFee:infoCost AppleOrderNO:orderno NotifyUrl:notify_url Attach:@"" ApplePayPassword:@"1"];
                             }];
                             
                         } failureBlock:^(NSError *error) {
                             //NSLog(@"++++%@",error.localizedDescription);
                             reject(error.localizedDescription, error.localizedDescription, error);
-                            [[JSSystem sharedInstance] beginApplePayWithAppleID:appleId TotalFee:infoCost AppleOrderNO:orderno NotifyUrl:notify_url Attach:@"" ApplePayPassword:@"1"];
                         } url:nil];
+}
+
+RCT_EXPORT_METHOD(beginApplePayWithAppleID:(NSString *)appleId
+                  infoCost:(NSString *)infoCost
+                  orderno:(NSString *)orderno
+                  notify_url:(NSString *)notify_url)
+{
+    [[JSSystem sharedInstance] beginApplePayWithAppleID:appleId TotalFee:infoCost AppleOrderNO:orderno NotifyUrl:notify_url Attach:@"" ApplePayPassword:@"1"];
 }
 
 RCT_EXPORT_METHOD(payWithBody:(NSDictionary *)body)
